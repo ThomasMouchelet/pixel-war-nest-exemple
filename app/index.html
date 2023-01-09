@@ -6,47 +6,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <script src="https://cdn.socket.io/4.5.4/socket.io.min.js" integrity="sha384-/KNQL8Nu5gCHLqwqfQjA689Hhoqgi2S84SNUxC3roTe4EhJ9AfLkp8QiQcU8AMzI" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <h1>Socket.io exemple</h1>
+    <h1>Pixels war - Logo team creator </h1>
+    
+    <div id="cursor"></div>
+    <canvas id="game"></canvas>
 
-    <button>
-        Click pixel faker
-    </button>
-
-    <ul id="pixelsList"></ul>
+    <div id="colorsChoice"></div>
     
 
-    <script>
-        const socket = io("http://localhost:8000");
-        const pixelsList = document.querySelector("#pixelsList");
-
-        socket.on("connect", () => {
-            console.log("Connected to server");
-        });
-
-        socket.on("disconnect", () => {
-            console.log("Disconnected from server");
-        });
-
-        socket.on("newPixel", (pixels) => {
-            console.log("New pixel", pixels);
-            pixelsList.innerHTML = "";
-            pixels.forEach(pixel => {
-                const li = document.createElement("li");
-                li.innerHTML = `x: ${pixel.x}, y: ${pixel.y}, color: ${pixel.color}`;
-                pixelsList.appendChild(li);
-            });
-        });
-
-        document.querySelector("button").addEventListener("click", () => {
-            socket.emit("newPixel", {
-                x: Math.floor(Math.random() * 100),
-                y: Math.floor(Math.random() * 100),
-                color: "#000000"
-            });
-        });
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
