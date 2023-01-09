@@ -1,0 +1,25 @@
+version: '3.1'
+services:
+  adminer:
+    image: adminer
+    container_name: adminer
+    environment:
+      ADMINER_DESIGN: pepa-linha
+      ADMINER_DEFAULT_SERVER: database
+    ports:
+      - 8080:8080
+  database:
+    image: postgres
+    restart: always
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: mydb
+  # maildev:
+  #   image: maildev/maildev
+  #   command: bin/maildev --web 80 --smtp 25 --hide-extensions STARTTLS
+  #   ports:
+  #     - "8081:80"
+  #     - "25:25"
